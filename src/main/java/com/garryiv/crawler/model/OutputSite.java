@@ -57,8 +57,8 @@ public class OutputSite {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mobile=" + mobile +
-                ", score=" + score +
                 ", keywords=" + keywords +
+                ", score=" + score +
                 '}';
     }
 }

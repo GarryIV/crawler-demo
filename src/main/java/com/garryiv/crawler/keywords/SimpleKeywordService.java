@@ -29,6 +29,9 @@ public class SimpleKeywordService implements KeywordService {
         }
     }
 
+    /**
+     * Leave only words are made of numbers and letters
+     */
     private String extractKeywords(Document document) {
         return Stream.of(document.text().split("[^\\p{L}\\p{N}]"))
             .filter(s -> s.length() > 2)
