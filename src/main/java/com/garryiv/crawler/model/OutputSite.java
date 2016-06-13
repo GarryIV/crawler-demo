@@ -1,11 +1,15 @@
 package com.garryiv.crawler.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.garryiv.crawler.jackson.NumericBooleanSerializer;
+
 public class OutputSite {
     private long id;
     private String name;
+    @JsonSerialize(using = NumericBooleanSerializer.class)
     private boolean mobile;
-    private double score;
     private String keywords;
+    private double score;
 
     public long getId() {
         return id;

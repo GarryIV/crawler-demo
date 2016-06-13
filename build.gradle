@@ -20,7 +20,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind'
     compile 'com.fasterxml.jackson.core:jackson-annotations'
     compile 'org.apache.commons:commons-csv:1.4'
-    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'org.jsoup:jsoup:1.8.3'
+
     testCompile 'junit:junit'
 }
 
