@@ -1,8 +1,8 @@
 # crawler-demo
 
 To build the demo:
-*  navigate to the 'crawler-demo' directory
-*  execute 'gradlew build'
+*  navigate to the `crawler-demo` directory
+*  execute `gradlew build`
 
 To run the demo via gradle:
 * execute `gradlew execute`
