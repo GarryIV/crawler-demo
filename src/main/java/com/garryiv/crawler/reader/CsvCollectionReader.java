@@ -35,7 +35,7 @@ public class CsvCollectionReader implements CollectionReader {
     private InputSite readSite(CSVRecord record) {
         InputSite site = new InputSite();
         site.setId(Long.parseLong(record.get(Record.ID)));
-        site.setUrl(record.get(Record.NAME));
+        site.setName(record.get(Record.NAME));
         site.setMobile(Boolean.parseBoolean(record.get(Record.IS_MOBILE)));
         site.setScore(Double.parseDouble(record.get(Record.SCORE)));
         return site;

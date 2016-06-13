@@ -1,32 +1,11 @@
 package com.garryiv.crawler.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * Stores data from input collections
- */
-public class InputSite {
-
-    /***
-     * Site id
-     */
-    @JsonProperty("site_id")
+public class OutputSite {
     private long id;
-
-    /**
-     * Site name (url)
-     */
     private String name;
-
-    /**
-     * Process as mobile site
-     */
     private boolean mobile;
-
-    /**
-     * Score of the site
-     */
     private double score;
+    private String keywords;
 
     public long getId() {
         return id;
@@ -60,13 +39,22 @@ public class InputSite {
         this.score = score;
     }
 
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
     @Override
     public String toString() {
-        return "InputSite{" +
+        return "OutputSite{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mobile=" + mobile +
                 ", score=" + score +
+                ", keywords=" + keywords +
                 '}';
     }
 }

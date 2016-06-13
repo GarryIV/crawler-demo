@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Chooses CollectionReader by file extension.
+ * This class is thread-safe after initial configuration (by calling addMapping).
  */
 public class ExtensionBasedCollectionReader implements CollectionReader {
 

@@ -1,6 +1,11 @@
 package com.garryiv.crawler.reader;
 
-public class CollectionReaderException extends RuntimeException {
+import com.garryiv.crawler.CrawlerException;
+
+/**
+ * Exception while reading collection file
+ */
+public class CollectionReaderException extends CrawlerException {
     public CollectionReaderException(String message) {
         super(message);
     }

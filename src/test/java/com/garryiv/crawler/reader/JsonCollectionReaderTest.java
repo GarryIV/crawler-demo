@@ -21,19 +21,19 @@ public class JsonCollectionReaderTest extends Assert {
 
         InputSite site0 = collection.getSites().get(0);
         assertEquals(13000, site0.getId());
-        assertEquals("example.com/json1", site0.getUrl());
+        assertEquals("example.com/json1", site0.getName());
         assertEquals(true, site0.isMobile());
         assertEquals(21., site0.getScore(), 0.);
 
         InputSite site1 = collection.getSites().get(1);
         assertEquals(13001, site1.getId());
-        assertEquals("example.com/json2", site1.getUrl());
+        assertEquals("example.com/json2", site1.getName());
         assertEquals(false, site1.isMobile());
         assertEquals(97., site1.getScore(), 0.);
 
         InputSite site2 = collection.getSites().get(2);
         assertEquals(13002, site2.getId());
-        assertEquals("example.com/json3", site2.getUrl());
+        assertEquals("example.com/json3", site2.getName());
         assertEquals(false, site2.isMobile());
         assertEquals(311., site2.getScore(), 0.);
     }
