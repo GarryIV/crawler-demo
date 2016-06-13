@@ -3,10 +3,10 @@ package com.garryiv.crawler.processor;
 import com.garryiv.crawler.model.InputSite;
 import com.garryiv.crawler.model.OutputSite;
 import com.garryiv.crawler.model.SitesCollection;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ProcessorTest extends Assert {
         processor = new Processor(InputSite::getName);
     }
 
-    @Autowired
+    @After
     public void clean() throws InterruptedException {
         processor.shutdown();
     }
