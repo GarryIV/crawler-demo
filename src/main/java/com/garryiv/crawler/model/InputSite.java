@@ -2,11 +2,19 @@ package com.garryiv.crawler.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Stores data from input collections
+ */
 public class InputSite {
+
     @JsonProperty("site_id")
     private long id;
-    private String name;
+
+    @JsonProperty("name")
+    private String url;
+
     private boolean mobile;
+
     private double score;
 
     public long getId() {
@@ -17,12 +25,12 @@ public class InputSite {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public boolean isMobile() {
@@ -45,7 +53,7 @@ public class InputSite {
     public String toString() {
         return "InputSite{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 ", mobile=" + mobile +
                 ", score=" + score +
                 '}';

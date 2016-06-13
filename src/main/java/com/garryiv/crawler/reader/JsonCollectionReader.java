@@ -8,11 +8,12 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * Reads collection from json files. File
+ * Reads collection from JSON file.
  */
-public class JsonCollectionReader {
+public class JsonCollectionReader implements CollectionReader {
     private ObjectMapper mapper = new ObjectMapper();
 
+    @Override
     public SitesCollection<InputSite> read(String collectionId, Path path) {
         try {
             InputSite[] sites = mapper.readValue(path.toFile(), InputSite[].class);
