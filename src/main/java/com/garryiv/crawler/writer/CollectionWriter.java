@@ -9,6 +9,7 @@ import com.garryiv.crawler.model.SitesCollection;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -24,7 +25,7 @@ public class CollectionWriter {
     public void write(Collection<SitesCollection<OutputSite>> collections, Path filePath) {
         makeParentDirectory(filePath);
 
-        try (Writer writer = new OutputStreamWriter(Files.newOutputStream(filePath))) {
+        try (Writer writer = new OutputStreamWriter(Files.newOutputStream(filePath), StandardCharsets.UTF_8)) {
             for (SitesCollection<OutputSite> collection : collections) {
                 mapper.writeValue(writer, collection);
                 writer.write(lineSeparator);
