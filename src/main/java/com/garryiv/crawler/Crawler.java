@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -76,8 +77,8 @@ public class Crawler implements ApplicationRunner {
     }
 
     @Bean
-    public DirectoryReader directoryReader() {
-        return new DirectoryReader(collectionReader());
+    public DirectoryReader directoryReader(CollectionReader collectionReader) {
+        return new DirectoryReader(collectionReader);
     }
 
     @Bean
@@ -86,9 +87,11 @@ public class Crawler implements ApplicationRunner {
     }
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder()
+        ConfigurableApplicationContext context = new SpringApplicationBuilder()
                 .sources(Crawler.class)
-                .bannerMode(Banner.Mode.OFF).run(args);
+                .bannerMode(Banner.Mode.OFF)
+                .run(args);
+        SpringApplication.exit(context);
     }
 
     @Override
@@ -105,7 +108,5 @@ public class Crawler implements ApplicationRunner {
         List<SitesCollection<InputSite>> collections = directoryReader.read(Paths.get(pathToDirectory));
         CompletableFuture<List<SitesCollection<OutputSite>>> res = processor.process(collections);
         res.thenAccept(sites -> collectionWriter.write(sites, Paths.get(outputFile))).get();
-
-        context.close();
     }
 }
