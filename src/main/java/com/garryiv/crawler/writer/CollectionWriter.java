@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.garryiv.crawler.model.OutputSite;
 import com.garryiv.crawler.model.SitesCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -15,6 +17,8 @@ import java.nio.file.Path;
 import java.util.Collection;
 
 public class CollectionWriter {
+    private static final Logger logger = LoggerFactory.getLogger(CollectionWriter.class);
+
     private ObjectMapper mapper = new ObjectMapper()
             .configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, false)
             .configure(SerializationFeature.CLOSE_CLOSEABLE, false)
@@ -33,6 +37,8 @@ public class CollectionWriter {
         } catch (Exception e) {
             throw new CollectionWriterException("Can't write file " + filePath);
         }
+
+        logger.info("Collections have been written to {}", filePath);
     }
 
     private void makeParentDirectory(Path filePath) {

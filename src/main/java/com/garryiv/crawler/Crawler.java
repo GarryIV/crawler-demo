@@ -6,7 +6,9 @@ import com.garryiv.crawler.keywords.SimpleKeywordService;
 import com.garryiv.crawler.model.InputSite;
 import com.garryiv.crawler.model.OutputSite;
 import com.garryiv.crawler.model.SitesCollection;
-import com.garryiv.crawler.processor.Processor;
+import com.garryiv.crawler.processor.CollectionProcessor;
+import com.garryiv.crawler.processor.SiteProcessor;
+import com.garryiv.crawler.processor.SiteProcessorImpl;
 import com.garryiv.crawler.reader.*;
 import com.garryiv.crawler.writer.CollectionWriter;
 import org.slf4j.Logger;
@@ -33,7 +35,7 @@ import java.util.concurrent.CompletableFuture;
 @EnableConfigurationProperties(CrawlerProperties.class)
 public class Crawler implements ApplicationRunner {
 
-    private static Logger logger = LoggerFactory.getLogger(Crawler.class);
+    private static final Logger logger = LoggerFactory.getLogger(Crawler.class);
 
     @Autowired
     private CrawlerProperties properties;
@@ -42,7 +44,7 @@ public class Crawler implements ApplicationRunner {
     private DirectoryReader directoryReader;
 
     @Autowired
-    private Processor processor;
+    private CollectionProcessor collectionProcessor;
 
     @Autowired
     private CollectionWriter collectionWriter;
@@ -82,8 +84,13 @@ public class Crawler implements ApplicationRunner {
     }
 
     @Bean
-    public Processor processor(KeywordService keywordService) {
-        return new Processor(keywordService);
+    public SiteProcessor siteProcessor(KeywordService keywordService) {
+        return new SiteProcessorImpl(keywordService);
+    }
+
+    @Bean
+    public CollectionProcessor processor(SiteProcessor keywordService) {
+        return new CollectionProcessor(keywordService);
     }
 
     public static void main(String[] args) {
@@ -106,7 +113,7 @@ public class Crawler implements ApplicationRunner {
         Assert.hasText(outputFile);
 
         List<SitesCollection<InputSite>> collections = directoryReader.read(Paths.get(pathToDirectory));
-        CompletableFuture<List<SitesCollection<OutputSite>>> res = processor.process(collections);
+        CompletableFuture<List<SitesCollection<OutputSite>>> res = collectionProcessor.process(collections);
         res.thenAccept(sites -> collectionWriter.write(sites, Paths.get(outputFile))).get();
     }
 }

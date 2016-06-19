@@ -3,34 +3,26 @@ package com.garryiv.crawler.processor;
 import com.garryiv.crawler.model.InputSite;
 import com.garryiv.crawler.model.OutputSite;
 import com.garryiv.crawler.model.SitesCollection;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-public class ProcessorTest extends Assert {
+public class CollectionProcessorTest extends Assert {
 
-    private Processor processor;
+    private CollectionProcessor collectionProcessor = new CollectionProcessor(input -> {
+        OutputSite output = new OutputSite();
+        output.setName(input.getName());
+        output.setKeywords(input.getName());
+        return CompletableFuture.completedFuture(output);
+    });
 
-    @Before
-    public void init() {
-        processor = new Processor(InputSite::getName);
-    }
-
-    @After
-    public void clean() throws InterruptedException {
-        processor.shutdown();
-    }
-
-    @Test(timeout = 10000)
+    @Test
     public void process() throws Exception {
-
         List<SitesCollection<InputSite>> input = generate();
-
-        List<SitesCollection<OutputSite>> output = processor.process(input).get();
+        List<SitesCollection<OutputSite>> output = collectionProcessor.process(input).get();
 
         assertNotNull(output);
         assertEquals(input.size(), output.size());
